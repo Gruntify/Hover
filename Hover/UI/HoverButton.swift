@@ -19,7 +19,7 @@ class HoverButton: UIControl {
         static let highlightColor = UIColor.white.withAlphaComponent(0.2)
     }
     
-    var imageTintColor: UIColor {
+    var imageTintColor: UIColor? {
         get { return imageView.tintColor }
         set { imageView.tintColor = newValue }
     }
