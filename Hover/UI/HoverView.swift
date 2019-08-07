@@ -76,6 +76,12 @@ public class HoverView: UIView {
         }
     }
     
+    public var canAdjustPosition: Bool = true {
+        didSet {
+            panRecognizer.isEnabled = canAdjustPosition
+        }
+    }
+    
     public var onPositionChange: ((HoverPosition) -> ())?
     
     // MARK: Private Properties
@@ -116,6 +122,7 @@ public class HoverView: UIView {
         self.configuration = configuration
         self.button = HoverButton(with: configuration.color, image: configuration.image, imageSizeRatio: configuration.imageSizeRatio)
         super.init(frame: .zero)
+        self.panRecognizer.addTarget(self, action: #selector(onPan(from:)))
         configure()
     }
     
@@ -182,7 +189,7 @@ private extension HoverView {
     func setupSubviews() {
         dimView.backgroundColor = configuration.dimColor
         
-        button.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPan(from:))))
+        button.addGestureRecognizer(panRecognizer)
         button.addTarget(self, action: #selector(onTapInButton), for: .touchUpInside)
     }
 }
