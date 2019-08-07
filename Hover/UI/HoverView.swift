@@ -207,7 +207,11 @@ private extension HoverView {
     
     @objc
     func onTapInButton() {
-        animateState(to: !isOpen)
+        if items.count == 1, let singleItem = items.first {
+            singleItem.onTap()
+        } else {
+            animateState(to: !isOpen)
+        }
     }
     
     @objc
