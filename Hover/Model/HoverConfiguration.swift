@@ -34,6 +34,8 @@ public struct HoverConfiguration {
     public var spacing: CGFloat
     /// Font used in items' labels
     public var font: UIFont?
+    /// Text color used for item labels
+    public var textColor: UIColor
     /// Color of the overlay
     public var dimColor: UIColor
     /// Initial position of the floating button
@@ -47,6 +49,7 @@ public struct HoverConfiguration {
                                       scaleDownTransform: scaleDownTransform,
                                       margin: size * ((1 - Constant.itemSizeRatio) / 2),
                                       font: font,
+                                      textColor: textColor,
                                       initialXOrientation: initialPosition.xOrientation)
     }
     
@@ -59,6 +62,7 @@ public struct HoverConfiguration {
                 imageOpenedTransform: CGAffineTransform = .identity,
                 spacing: CGFloat = 12.0,
                 font: UIFont? = nil,
+                textColor: UIColor = .white,
                 dimColor: UIColor = UIColor.black.withAlphaComponent(0.75),
                 initialPosition: HoverPosition = .bottomRight,
                 allowedPositions: Set<HoverPosition> = .all) {
@@ -71,6 +75,7 @@ public struct HoverConfiguration {
         self.imageOpenedTransform = imageOpenedTransform
         self.spacing = spacing
         self.font = font
+        self.textColor = textColor
         self.dimColor = dimColor
         self.initialPosition = initialPosition
         self.allowedPositions = allowedPositions
@@ -85,6 +90,7 @@ struct HoverItemConfiguration {
     let scaleDownTransform: CGAffineTransform
     let margin: CGFloat
     let font: UIFont?
+    let textColor: UIColor
     let initialXOrientation: Orientation.X
 }
 
