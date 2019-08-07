@@ -19,6 +19,11 @@ class HoverButton: UIControl {
         static let highlightColor = UIColor.white.withAlphaComponent(0.2)
     }
     
+    var imageTintColor: UIColor {
+        get { return imageView.tintColor }
+        set { imageView.tintColor = newValue }
+    }
+    
     // MARK: Outlets
     private var gradientLayer: CAGradientLayer?
     private let imageView: UIImageView = .create {

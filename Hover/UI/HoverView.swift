@@ -81,6 +81,10 @@ public class HoverView: UIView {
             panRecognizer.isEnabled = canAdjustPosition
         }
     }
+    public var imageTintColor: UIColor {
+        get { return button.imageTintColor }
+        set { button.imageTintColor = newValue }
+    }
     
     public var onPositionChange: ((HoverPosition) -> ())?
     
