@@ -120,7 +120,7 @@ public class HoverView: UIView {
         
         self.currentAnchor = currentAnchor
         self.configuration = configuration
-        self.button = HoverButton(with: configuration.color, image: configuration.image, imageSizeRatio: configuration.imageSizeRatio)
+        self.button = HoverButton(with: configuration.color, image: configuration.image, imageSizeRatio: configuration.imageSizeRatio, scaleDownTransform: configuration.scaleDownTransform)
         super.init(frame: .zero)
         self.panRecognizer.addTarget(self, action: #selector(onPan(from:)))
         configure()

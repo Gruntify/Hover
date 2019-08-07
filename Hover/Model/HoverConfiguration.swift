@@ -26,6 +26,8 @@ public struct HoverConfiguration {
     public var size: CGFloat
     /// Dictates the size of the image shown in any button (imageSize = size * imageSizeRatio)
     public var imageSizeRatio: CGFloat
+    /// Transform of button when highlighted.
+    public var scaleDownTransform: CGAffineTransform
     /// Spacing between the floating button to the edges
     public var spacing: CGFloat
     /// Font used in items' labels
@@ -40,6 +42,7 @@ public struct HoverConfiguration {
     var itemConfiguration: HoverItemConfiguration {
         return HoverItemConfiguration(size: size * Constant.itemSizeRatio,
                                       imageSizeRatio: imageSizeRatio,
+                                      scaleDownTransform: scaleDownTransform,
                                       margin: size * ((1 - Constant.itemSizeRatio) / 2),
                                       font: font,
                                       initialXOrientation: initialPosition.xOrientation)
@@ -50,6 +53,7 @@ public struct HoverConfiguration {
                 color: HoverColor = .color(.blue),
                 size: CGFloat = 60.0,
                 imageSizeRatio: CGFloat = 0.4,
+                scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
                 spacing: CGFloat = 12.0,
                 font: UIFont? = nil,
                 dimColor: UIColor = UIColor.black.withAlphaComponent(0.75),
@@ -60,6 +64,7 @@ public struct HoverConfiguration {
         self.image = image
         self.size = size
         self.imageSizeRatio = imageSizeRatio
+        self.scaleDownTransform = scaleDownTransform
         self.spacing = spacing
         self.font = font
         self.dimColor = dimColor
@@ -73,6 +78,7 @@ struct HoverItemConfiguration {
     
     let size: CGFloat
     let imageSizeRatio: CGFloat
+    let scaleDownTransform: CGAffineTransform
     let margin: CGFloat
     let font: UIFont?
     let initialXOrientation: Orientation.X

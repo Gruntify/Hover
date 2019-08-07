@@ -14,7 +14,6 @@ class HoverButton: UIControl {
     // MARK: Constant
     private enum Constant {
         static let minimumHeight: CGFloat = 44.0
-        static let scaleDownTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         static let animationDuration = 0.5
         static let animationDamping: CGFloat = 0.4
         static let highlightColor = UIColor.white.withAlphaComponent(0.2)
@@ -32,6 +31,7 @@ class HoverButton: UIControl {
         $0.clipsToBounds = true
         $0.alpha = 0.0
     }
+    private var scaleDownTransform: CGAffineTransform
     
     // MARK: Overriden Properties
     override var intrinsicContentSize: CGSize {
@@ -40,7 +40,7 @@ class HoverButton: UIControl {
     
     override var isHighlighted: Bool {
         didSet {
-            let transform: CGAffineTransform = isHighlighted ? Constant.scaleDownTransform : .identity
+            let transform: CGAffineTransform = isHighlighted ? scaleDownTransform : .identity
             let alpha: CGFloat = isHighlighted ? 1.0 : 0.0
             
             UIViewPropertyAnimator(duration: Constant.animationDuration, dampingRatio: Constant.animationDamping) {
@@ -51,7 +51,8 @@ class HoverButton: UIControl {
     }
     
     // MARK: Lifecycle
-    init(with color: HoverColor, image: UIImage?, imageSizeRatio: CGFloat) {
+    init(with color: HoverColor, image: UIImage?, imageSizeRatio: CGFloat, scaleDownTransform: CGAffineTransform) {
+        self.scaleDownTransform = scaleDownTransform
         super.init(frame: .zero)
         configure(with: color, image: image, imageSizeRatio: imageSizeRatio)
     }
