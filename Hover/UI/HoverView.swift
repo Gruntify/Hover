@@ -269,6 +269,7 @@ private extension HoverView {
         
         UIViewPropertyAnimator(duration: Constant.animationDuration, curve: .easeInOut) {
             self.dimView.alpha = isOpening ? 1.0 : 0.0
+            self.button.imageTransform = isOpening ? self.configuration.imageOpenedTransform : .identity
         }.startAnimation()
         
         anchor.position.yOrientation.reverseArrayIfNeeded(itemsStackView.arrangedSubviews).enumerated().forEach { (index, view) in

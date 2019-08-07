@@ -28,6 +28,8 @@ public struct HoverConfiguration {
     public var imageSizeRatio: CGFloat
     /// Transform of button when highlighted.
     public var scaleDownTransform: CGAffineTransform
+    /// Transform of image when button is opened
+    public var imageOpenedTransform: CGAffineTransform
     /// Spacing between the floating button to the edges
     public var spacing: CGFloat
     /// Font used in items' labels
@@ -54,6 +56,7 @@ public struct HoverConfiguration {
                 size: CGFloat = 60.0,
                 imageSizeRatio: CGFloat = 0.4,
                 scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
+                imageOpenedTransform: CGAffineTransform = .identity,
                 spacing: CGFloat = 12.0,
                 font: UIFont? = nil,
                 dimColor: UIColor = UIColor.black.withAlphaComponent(0.75),
@@ -65,6 +68,7 @@ public struct HoverConfiguration {
         self.size = size
         self.imageSizeRatio = imageSizeRatio
         self.scaleDownTransform = scaleDownTransform
+        self.imageOpenedTransform = imageOpenedTransform
         self.spacing = spacing
         self.font = font
         self.dimColor = dimColor

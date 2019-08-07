@@ -24,6 +24,11 @@ class HoverButton: UIControl {
         set { imageView.tintColor = newValue }
     }
     
+    public var imageTransform: CGAffineTransform {
+        get { return imageView.transform }
+        set { imageView.transform = newValue }
+    }
+    
     // MARK: Outlets
     private var gradientLayer: CAGradientLayer?
     private let imageView: UIImageView = .create {
