@@ -46,23 +46,23 @@ extension HoverPosition {
         switch self {
         case .topLeft:
             positionConstraints = [
-                guide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing),
-                guide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
+                guide.topAnchor.constraint(equalTo: view.safeAreaTopAnchor, constant: spacing),
+                guide.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor, constant: spacing)
             ]
         case .topRight:
             positionConstraints = [
-                guide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing),
-                guide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
+                guide.topAnchor.constraint(equalTo: view.safeAreaTopAnchor, constant: spacing),
+                guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
         case .bottomLeft:
             positionConstraints = [
-                guide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -spacing),
-                guide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
+                guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
+                guide.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor, constant: spacing)
             ]
         case .bottomRight:
             positionConstraints = [
-                guide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -spacing),
-                guide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
+                guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
+                guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
         }
         NSLayoutConstraint.activate(positionConstraints)
@@ -80,3 +80,36 @@ extension HoverPosition: CaseIterable {}
 
 // MARK: - Equatable
 extension HoverPosition: Equatable {}
+
+// MARK: - Safe area
+extension UIView {
+    
+    var safeAreaTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.topAnchor
+        } else {
+            return topAnchor
+        }
+    }
+    var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return bottomAnchor
+        }
+    }
+    var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.leadingAnchor
+        } else {
+            return leadingAnchor
+        }
+    }
+    var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.trailingAnchor
+        } else {
+            return trailingAnchor
+        }
+    }
+}
