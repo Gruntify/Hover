@@ -6,10 +6,17 @@ import os
 class ViewController: UIViewController {
     
     @IBOutlet weak var webview: WKWebView!
-    private let hoverView = HoverView(with: HoverConfiguration(image: .add, color: .gradient(top: .pink, bottom: .darkPink)),
-                                      items: [HoverItem(title: "Drop it Anywhere", image: .anywhere) { os_log("Tapped 'Drop it anywhere'") },
-                                              HoverItem(title: "Gesture Driven", image: .gesture) { os_log("Tapped 'Gesture driven'") },
-                                              HoverItem(title: "Give it a Star", image: .star) { os_log("Tapped 'Give it a star'") }])
+    private let hoverView = HoverView(
+        with: HoverConfiguration(
+            image: .add,
+            color: .gradient(top: .pink, bottom: .darkPink)
+        ),
+        items: [
+            HoverItem(title: "Drop it Anywhere", image: .anywhere) { os_log("Tapped 'Drop it anywhere'") },
+            HoverItem(title: "Gesture Driven", image: .gesture) { os_log("Tapped 'Gesture driven'") },
+            HoverItem(title: "Give it a Star", image: .star) { os_log("Tapped 'Give it a star'") },
+        ]
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
