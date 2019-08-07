@@ -33,7 +33,7 @@ class HoverItemView: UIStackView {
     init(with item: HoverItem, configuration: HoverItemConfiguration) {
         self.item = item
         self.orientation = configuration.initialXOrientation
-        self.button = HoverButton(with: .color(.white), image: item.image, imageSizeRatio: configuration.imageSizeRatio, scaleDownTransform: configuration.scaleDownTransform)
+        self.button = HoverButton(with: configuration.color, image: item.image, imageSizeRatio: configuration.imageSizeRatio, scaleDownTransform: configuration.scaleDownTransform)
         self.button.imageTintColor = item.imageTintColor
         label.textColor = configuration.textColor
         

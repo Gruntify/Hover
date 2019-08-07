@@ -20,6 +20,8 @@ public struct HoverConfiguration {
     // MARK: Properties
     /// Color / Gradient of the floating button
     public var color: HoverColor
+    /// Color of the item buttons
+    public var itemColor: HoverColor
     /// Image displayed in the floating button
     public var image: UIImage?
     /// Size of the floating button
@@ -45,6 +47,7 @@ public struct HoverConfiguration {
     
     var itemConfiguration: HoverItemConfiguration {
         return HoverItemConfiguration(size: size * Constant.itemSizeRatio,
+                                      color: itemColor,
                                       imageSizeRatio: imageSizeRatio,
                                       scaleDownTransform: scaleDownTransform,
                                       margin: size * ((1 - Constant.itemSizeRatio) / 2),
@@ -56,6 +59,7 @@ public struct HoverConfiguration {
     // MARK: Init
     public init(image: UIImage? = nil,
                 color: HoverColor = .color(.blue),
+                itemColor: HoverColor = .color(.white),
                 size: CGFloat = 60.0,
                 imageSizeRatio: CGFloat = 0.4,
                 scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
@@ -68,6 +72,7 @@ public struct HoverConfiguration {
                 allowedPositions: Set<HoverPosition> = .all) {
         
         self.color = color
+        self.itemColor = itemColor
         self.image = image
         self.size = size
         self.imageSizeRatio = imageSizeRatio
@@ -86,6 +91,7 @@ public struct HoverConfiguration {
 struct HoverItemConfiguration {
     
     let size: CGFloat
+    let color: HoverColor
     let imageSizeRatio: CGFloat
     let scaleDownTransform: CGAffineTransform
     let margin: CGFloat
