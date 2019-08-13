@@ -41,7 +41,7 @@ extension HoverPosition {
 // MARK: - Configuration
 extension HoverPosition {
 
-    func configurePosition(of guide: UILayoutGuide, inside view: UIView, with spacing: CGFloat) {
+    func configurePosition(of guide: UILayoutGuide, inside view: UIView, with spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) {
         let positionConstraints: [NSLayoutConstraint]
         switch self {
         case .topLeft:
@@ -55,18 +55,39 @@ extension HoverPosition {
                 guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
         case .bottomLeft:
-            positionConstraints = [
-                guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
-                guide.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor, constant: spacing)
+            let bottomConstraints = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
+            positionConstraints = bottomConstraints + [
+                guide.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor, constant: spacing),
             ]
         case .bottomRight:
-            positionConstraints = [
-                guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
+            let bottomConstraints = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
+            positionConstraints = bottomConstraints + [
                 guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
         }
         NSLayoutConstraint.activate(positionConstraints)
     }
+    
+    private func bottomConstraints(for guide: UILayoutGuide, view: UIView, spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) -> [NSLayoutConstraint] {
+        let bottomConstraints: [NSLayoutConstraint]
+        // https://stackoverflow.com/a/53634824/
+        if constrainBottomToSafeAreaIfNonZeroHeight {
+            let toSafeArea = guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: 0)
+            toSafeArea.priority = .defaultLow
+            let toSuperview = guide.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -spacing)
+            toSuperview.priority = .defaultHigh
+            bottomConstraints = [
+                toSafeArea,
+                toSuperview,
+            ]
+        } else {
+            bottomConstraints = [
+                guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
+            ]
+        }
+        return bottomConstraints
+    }
+
 }
 
 // MARK: - Sugar

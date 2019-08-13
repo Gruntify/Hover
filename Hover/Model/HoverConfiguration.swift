@@ -34,6 +34,9 @@ public struct HoverConfiguration {
     public var imageOpenedTransform: CGAffineTransform
     /// Spacing between the floating button to the edges
     public var spacing: CGFloat
+    /// Whether or not spacing is used for button's bottom constraints when there's a non-zero height safe area (eg. iPhone X)
+    /// - Note: [StackOverflow Reference](https://stackoverflow.com/a/53634824/)
+    public var constrainBottomToSafeAreaIfNonZeroHeight: Bool
     /// Font used in items' labels
     public var font: UIFont?
     /// Text color used for item labels
@@ -65,6 +68,7 @@ public struct HoverConfiguration {
                 scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
                 imageOpenedTransform: CGAffineTransform = .identity,
                 spacing: CGFloat = 12.0,
+                constrainBottomToSafeAreaIfNonZeroHeight: Bool = false,
                 font: UIFont? = nil,
                 textColor: UIColor = .white,
                 dimColor: UIColor = UIColor.black.withAlphaComponent(0.75),
@@ -79,6 +83,7 @@ public struct HoverConfiguration {
         self.scaleDownTransform = scaleDownTransform
         self.imageOpenedTransform = imageOpenedTransform
         self.spacing = spacing
+        self.constrainBottomToSafeAreaIfNonZeroHeight = constrainBottomToSafeAreaIfNonZeroHeight
         self.font = font
         self.textColor = textColor
         self.dimColor = dimColor
