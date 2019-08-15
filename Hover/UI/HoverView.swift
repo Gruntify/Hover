@@ -85,6 +85,10 @@ public class HoverView: UIView {
         get { return button.imageTintColor }
         set { button.imageTintColor = newValue }
     }
+    public var itemSpacing: CGFloat {
+        get { return itemsStackView.spacing }
+        set { itemsStackView.spacing = newValue }
+    }
     
     public var onPositionChange: ((HoverPosition) -> ())?
     
