@@ -29,20 +29,56 @@ extension UIView {
 }
 
 // MARK: - Shadow
-extension UIView {
+
+public struct HoverShadow {
     
     // MARK: Constant
-    private enum ShadowConstant {
-        static let heightOffset = 0
-        static let opacity: Float = 0.55
-        static let radius: CGFloat = 10
+    public enum ShadowConstant {
+        public static let heightOffset = 0
+        public static let opacity: Float = 0.55
+        public static let radius: CGFloat = 10
     }
     
+    public var color: CGColor
+    public var offset: CGSize
+    public var opacity: Float
+    public var radius: CGFloat
+    
+    public init(
+        color: CGColor = UIColor.black.cgColor,
+        offset: CGSize = CGSize(width: 0, height: 5),
+        opacity: Float = ShadowConstant.opacity,
+        radius: CGFloat = ShadowConstant.radius
+        ) {
+        self.color = color
+        self.offset = offset
+        self.opacity = opacity
+        self.radius = radius
+    }
+    
+}
+
+extension UIView {
+    
     // MARK: Functions
-    func addShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 5)
-        layer.shadowOpacity = ShadowConstant.opacity
-        layer.shadowRadius = ShadowConstant.radius
+    func addShadow(
+        color: CGColor,
+        offset: CGSize,
+        opacity: Float,
+        radius: CGFloat
+        ) {
+        layer.shadowColor = color
+        layer.shadowOffset = offset
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = radius
+    }
+    
+    func addShadow(_ shadow: HoverShadow) {
+        self.addShadow(
+            color: shadow.color,
+            offset: shadow.offset,
+            opacity: shadow.opacity,
+            radius: shadow.radius
+        )
     }
 }

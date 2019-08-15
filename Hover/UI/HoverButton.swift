@@ -42,6 +42,7 @@ class HoverButton: UIControl {
         $0.alpha = 0.0
     }
     private var scaleDownTransform: CGAffineTransform
+    private var shadow: HoverShadow
     
     // MARK: Overriden Properties
     override var intrinsicContentSize: CGSize {
@@ -61,8 +62,9 @@ class HoverButton: UIControl {
     }
     
     // MARK: Lifecycle
-    init(with color: HoverColor, image: UIImage?, imageSizeRatio: CGFloat, scaleDownTransform: CGAffineTransform) {
+    init(with color: HoverColor, image: UIImage?, imageSizeRatio: CGFloat, scaleDownTransform: CGAffineTransform, shadow: HoverShadow) {
         self.scaleDownTransform = scaleDownTransform
+        self.shadow = shadow
         super.init(frame: .zero)
         configure(with: color, image: image, imageSizeRatio: imageSizeRatio)
     }
@@ -78,7 +80,7 @@ class HoverButton: UIControl {
         hightlightView.layer.decorateAsCircle()
         gradientLayer?.frame = bounds
         gradientLayer?.decorateAsCircle()
-        addShadow()
+        addShadow(shadow)
     }
 }
 
