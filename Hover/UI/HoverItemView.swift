@@ -13,7 +13,7 @@ class HoverItemView: UIStackView {
     
     // MARK: Constant
     private enum Constant {
-        static let interItemSpacing: CGFloat = 8.0
+        
     }
     
     // MARK: Outlets
@@ -59,7 +59,7 @@ class HoverItemView: UIStackView {
 private extension HoverItemView {
     
     func configure(with configuration: HoverItemConfiguration) {
-        spacing = Constant.interItemSpacing
+        spacing = configuration.spacingBetweenButtonAndLabel
         
         addSubviews()
         defineConstraints(with: configuration.size)

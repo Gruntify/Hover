@@ -39,8 +39,10 @@ public struct HoverConfiguration {
     /// Whether or not spacing is used for button's bottom constraints when there's a non-zero height safe area (eg. iPhone X)
     /// - Note: [StackOverflow Reference](https://stackoverflow.com/a/53634824/)
     public var constrainBottomToSafeAreaIfNonZeroHeight: Bool
-    /// Spacing between the floating button to the first item
+    /// Spacing between the floating button to the first item.
     public var spacingToFirstItem: CGFloat
+    /// Spacing between the item's button and label.
+    public var itemSpacingBetweenButtonAndLabel: CGFloat
     /// Font used in items' labels
     public var font: UIFont?
     /// Text color used for item labels
@@ -65,6 +67,7 @@ public struct HoverConfiguration {
     var itemConfiguration: HoverItemConfiguration {
         return HoverItemConfiguration(
             size: size * Constant.itemSizeRatio,
+            spacingBetweenButtonAndLabel: itemSpacingBetweenButtonAndLabel,
             color: itemColor,
             imageSizeRatio: imageSizeRatio,
             scaleDownTransform: scaleDownTransform,
@@ -94,6 +97,7 @@ public struct HoverConfiguration {
         spacing: CGFloat = 12.0,
         constrainBottomToSafeAreaIfNonZeroHeight: Bool = false,
         spacingToFirstItem: CGFloat = 12.0,
+        itemSpacingBetweenButtonAndLabel: CGFloat = 8.0,
         font: UIFont? = nil,
         textColor: UIColor = .white,
         dimColor: UIColor = UIColor.black.withAlphaComponent(0.75),
@@ -116,6 +120,7 @@ public struct HoverConfiguration {
         self.spacing = spacing
         self.constrainBottomToSafeAreaIfNonZeroHeight = constrainBottomToSafeAreaIfNonZeroHeight
         self.spacingToFirstItem = spacingToFirstItem
+        self.itemSpacingBetweenButtonAndLabel = itemSpacingBetweenButtonAndLabel
         self.font = font
         self.textColor = textColor
         self.dimColor = dimColor
@@ -133,6 +138,7 @@ public struct HoverConfiguration {
 struct HoverItemConfiguration {
     
     let size: CGFloat
+    let spacingBetweenButtonAndLabel: CGFloat
     let color: HoverColor
     let imageSizeRatio: CGFloat
     let scaleDownTransform: CGAffineTransform
