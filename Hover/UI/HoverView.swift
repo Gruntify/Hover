@@ -307,19 +307,19 @@ private extension HoverView {
         case .topLeft:
             itemsStackView.add(arrangedViews: itemViews.reversed(), hidden: true)
             stackViewXConstraint = itemsStackView.leadingAnchor.constraint(equalTo: anchor.guide.leadingAnchor, constant: self.configuration.itemConfiguration.margin)
-            stackViewYConstraint = itemsStackView.topAnchor.constraint(equalTo: currentAnchor.guide.bottomAnchor, constant: self.configuration.spacing)
+            stackViewYConstraint = itemsStackView.topAnchor.constraint(equalTo: currentAnchor.guide.bottomAnchor, constant: self.configuration.spacingToFirstItem)
         case .topRight:
             itemsStackView.add(arrangedViews: itemViews.reversed(), hidden: true)
             stackViewXConstraint = itemsStackView.trailingAnchor.constraint(equalTo: anchor.guide.trailingAnchor, constant: -self.configuration.itemConfiguration.margin)
-            stackViewYConstraint = itemsStackView.topAnchor.constraint(equalTo: currentAnchor.guide.bottomAnchor, constant: self.configuration.spacing)
+            stackViewYConstraint = itemsStackView.topAnchor.constraint(equalTo: currentAnchor.guide.bottomAnchor, constant: self.configuration.spacingToFirstItem)
         case .bottomLeft:
             itemsStackView.add(arrangedViews: itemViews, hidden: true)
             stackViewXConstraint = itemsStackView.leadingAnchor.constraint(equalTo: anchor.guide.leadingAnchor, constant: self.configuration.itemConfiguration.margin)
-            stackViewYConstraint = itemsStackView.bottomAnchor.constraint(equalTo: currentAnchor.guide.topAnchor, constant: -self.configuration.spacing)
+            stackViewYConstraint = itemsStackView.bottomAnchor.constraint(equalTo: currentAnchor.guide.topAnchor, constant: -self.configuration.spacingToFirstItem)
         case .bottomRight:
             itemsStackView.add(arrangedViews: itemViews, hidden: true)
             stackViewXConstraint = itemsStackView.trailingAnchor.constraint(equalTo: anchor.guide.trailingAnchor, constant: -self.configuration.itemConfiguration.margin)
-            stackViewYConstraint = itemsStackView.bottomAnchor.constraint(equalTo: currentAnchor.guide.topAnchor, constant: -self.configuration.spacing)
+            stackViewYConstraint = itemsStackView.bottomAnchor.constraint(equalTo: currentAnchor.guide.topAnchor, constant: -self.configuration.spacingToFirstItem)
         }
         NSLayoutConstraint.activate([stackViewXConstraint, stackViewYConstraint])
         
