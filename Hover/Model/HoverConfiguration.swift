@@ -59,6 +59,8 @@ public struct HoverConfiguration {
     public var labelBackgroundShadow: HoverShadow
     /// Whether the label background is rounded.
     public var labelBackgroundIsRounded: Bool
+    /// Whether the label is tappable.
+    public var labelIsTappable: Bool
     
     var itemConfiguration: HoverItemConfiguration {
         return HoverItemConfiguration(
@@ -74,7 +76,8 @@ public struct HoverConfiguration {
             labelInsets: labelInsets,
             labelBackgroundColor: labelBackgroundColor,
             labelBackgroundShadow: labelBackgroundShadow,
-            labelBackgroundIsRounded: labelBackgroundIsRounded
+            labelBackgroundIsRounded: labelBackgroundIsRounded,
+            labelIsTappable: labelIsTappable
         )
     }
     
@@ -99,7 +102,8 @@ public struct HoverConfiguration {
         labelInsets: UIEdgeInsets = .zero,
         labelBackgroundColor: UIColor = .clear,
         labelBackgroundShadow: HoverShadow = HoverShadow(opacity: 0),
-        labelBackgroundIsRounded: Bool = true
+        labelBackgroundIsRounded: Bool = true,
+        labelIsTappable: Bool = false
         ) {
         self.color = color
         self.itemColor = itemColor
@@ -121,6 +125,7 @@ public struct HoverConfiguration {
         self.labelBackgroundColor = labelBackgroundColor
         self.labelBackgroundShadow = labelBackgroundShadow
         self.labelBackgroundIsRounded = labelBackgroundIsRounded
+        self.labelIsTappable = labelIsTappable
     }
 }
 
@@ -140,5 +145,6 @@ struct HoverItemConfiguration {
     let labelBackgroundColor: UIColor
     let labelBackgroundShadow: HoverShadow
     let labelBackgroundIsRounded: Bool
+    let labelIsTappable: Bool
 }
 

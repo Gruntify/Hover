@@ -9,7 +9,8 @@ class ViewController: UIViewController {
     private let hoverView = HoverView(
         with: HoverConfiguration(
             image: .add,
-            color: .gradient(top: .pink, bottom: .darkPink)
+            color: .gradient(top: .pink, bottom: .darkPink),
+            labelIsTappable: true
         ),
         items: [
             HoverItem(title: "Drop it Anywhere", image: .anywhere) { os_log("Tapped 'Drop it anywhere'") },

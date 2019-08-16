@@ -63,7 +63,7 @@ private extension HoverItemView {
         
         addSubviews()
         defineConstraints(with: configuration.size)
-        setupSubviews()
+        setupSubviews(tappableLabel: configuration.labelIsTappable)
     }
     
     func addSubviews() {
@@ -79,8 +79,11 @@ private extension HoverItemView {
         )
     }
     
-    func setupSubviews() {
+    func setupSubviews(tappableLabel: Bool) {
         button.addTarget(self, action: #selector(onTapInButton), for: .touchUpInside)
+        if tappableLabel {
+            label.roundedView.addTarget(self, action: #selector(onTapInButton), for: .touchUpInside)
+        }
     }
 }
 
@@ -202,7 +205,7 @@ class ItemLabelView: UIView {
     
 }
 
-class RoundedView: UIView {
+class RoundedView: UIButton {
     
     var roundedSides = true {
         didSet {
