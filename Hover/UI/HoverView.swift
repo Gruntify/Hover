@@ -196,6 +196,7 @@ private extension HoverView {
     
     func setupSubviews() {
         dimView.backgroundColor = configuration.dimColor
+        dimView.addTarget(self, action: #selector(onTouchInDim), for: .touchUpInside)
         
         button.addGestureRecognizer(panRecognizer)
         button.addTarget(self, action: #selector(onTapInButton), for: .touchUpInside)
@@ -205,6 +206,7 @@ private extension HoverView {
 // MARK: - Gestures
 private extension HoverView {
     
+    @objc
     func onTouchInDim() {
         animateState(to: false)
     }

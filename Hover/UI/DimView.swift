@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DimView: UIView {
+final class DimView: UIButton {
 
     init() {
         super.init(frame: .zero)
@@ -23,6 +23,6 @@ final class DimView: UIView {
 private extension DimView {
     
     func configure() {
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
     }
 }
