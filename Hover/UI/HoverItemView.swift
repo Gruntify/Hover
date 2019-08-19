@@ -161,8 +161,10 @@ class ItemLabelView: UIView {
         bottomConstraint = label.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor)
         NSLayoutConstraint.activate(
             [
-                roundedView.widthAnchor.constraint(equalTo: shadowView.widthAnchor),
-                roundedView.heightAnchor.constraint(equalTo: shadowView.heightAnchor),
+                roundedView.leadingAnchor.constraint(equalTo: shadowView.leadingAnchor),
+                roundedView.topAnchor.constraint(equalTo: shadowView.topAnchor),
+                roundedView.trailingAnchor.constraint(equalTo: shadowView.trailingAnchor),
+                roundedView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor),
                 topConstraint,
                 leadingConstraint,
                 trailingConstraint,
