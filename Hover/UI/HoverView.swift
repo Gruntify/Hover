@@ -111,6 +111,15 @@ public class HoverView: UIView {
         }
     }
     
+    private var safeAreaConstraints = [NSLayoutConstraint]()
+    
+    public override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
+//        let expected = configuration.spacing - safeAreaInsets.bottom
+//        let offset = min(max(expected, 0), -(configuration.spacing / 2))
+//        safeAreaConstraints.forEach { $0.constant = offset }
+    }
+    
     // MARK: Lifecycle
     public init(with configuration: HoverConfiguration = HoverConfiguration(), items: [HoverItem] = []) {
         
@@ -171,8 +180,12 @@ private extension HoverView {
     }
     
     func defineConstraints() {
+        var safeAreaConstraints = [NSLayoutConstraint]()
         anchors.forEach {
-            $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacing, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight)
+            if let safeAreaConstraint = $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacing, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight) {
+                safeAreaConstraints.append(safeAreaConstraint)
+            }
+
             NSLayoutConstraint.activate(
                 [
                     $0.guide.widthAnchor.constraint(equalToConstant: self.configuration.size),
@@ -180,6 +193,7 @@ private extension HoverView {
                 ]
             )
         }
+        self.safeAreaConstraints = safeAreaConstraints
         
         NSLayoutConstraint.activate(
             [

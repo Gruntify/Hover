@@ -41,8 +41,9 @@ extension HoverPosition {
 // MARK: - Configuration
 extension HoverPosition {
 
-    func configurePosition(of guide: UILayoutGuide, inside view: UIView, with spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) {
+    func configurePosition(of guide: UILayoutGuide, inside view: UIView, with spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) -> NSLayoutConstraint? {
         let positionConstraints: [NSLayoutConstraint]
+        var safeAreaConstraint: NSLayoutConstraint?
         switch self {
         case .topLeft:
             positionConstraints = [
@@ -55,21 +56,25 @@ extension HoverPosition {
                 guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
         case .bottomLeft:
-            let bottomConstraints = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
+            let (bottomConstraints, _safeAreaConstraint) = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
             positionConstraints = bottomConstraints + [
                 guide.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor, constant: spacing),
             ]
+            safeAreaConstraint = _safeAreaConstraint
         case .bottomRight:
-            let bottomConstraints = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
+            let (bottomConstraints, _safeAreaConstraint) = self.bottomConstraints(for: guide, view: view, spacing: spacing, constrainBottomToSafeAreaIfNonZeroHeight: constrainBottomToSafeAreaIfNonZeroHeight)
             positionConstraints = bottomConstraints + [
                 guide.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor, constant: -spacing)
             ]
+            safeAreaConstraint = _safeAreaConstraint
         }
         NSLayoutConstraint.activate(positionConstraints)
+        return safeAreaConstraint
     }
     
-    private func bottomConstraints(for guide: UILayoutGuide, view: UIView, spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) -> [NSLayoutConstraint] {
+    private func bottomConstraints(for guide: UILayoutGuide, view: UIView, spacing: CGFloat, constrainBottomToSafeAreaIfNonZeroHeight: Bool) -> ([NSLayoutConstraint], NSLayoutConstraint?) {
         let bottomConstraints: [NSLayoutConstraint]
+        var safeAreaConstraint: NSLayoutConstraint?
         // https://stackoverflow.com/a/53634824/
         if constrainBottomToSafeAreaIfNonZeroHeight {
             let toSafeArea = guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: 0)
@@ -80,12 +85,13 @@ extension HoverPosition {
                 toSafeArea,
                 toSuperview,
             ]
+            safeAreaConstraint = toSafeArea
         } else {
             bottomConstraints = [
                 guide.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor, constant: -spacing),
             ]
         }
-        return bottomConstraints
+        return (bottomConstraints, safeAreaConstraint)
     }
 
 }

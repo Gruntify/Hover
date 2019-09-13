@@ -94,7 +94,7 @@ public struct HoverConfiguration {
         scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
         shadow: HoverShadow = HoverShadow(),
         imageOpenedTransform: CGAffineTransform = .identity,
-        spacing: CGFloat = 12.0,
+        spacing: CGFloat = 20.0,
         constrainBottomToSafeAreaIfNonZeroHeight: Bool = false,
         spacingToFirstItem: CGFloat = 12.0,
         itemSpacingBetweenButtonAndLabel: CGFloat = 8.0,

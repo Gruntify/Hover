@@ -10,6 +10,7 @@ class ViewController: UIViewController {
         with: HoverConfiguration(
             image: .add,
             color: .gradient(top: .pink, bottom: .darkPink),
+            constrainBottomToSafeAreaIfNonZeroHeight: true,
             labelIsTappable: true
         ),
         items: [
