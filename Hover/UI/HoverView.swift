@@ -92,6 +92,15 @@ public class HoverView: UIView {
     
     public var onPositionChange: ((HoverPosition) -> ())?
     
+    /// Dynamic reference to the configuration's `spacingInsets.bottom`.
+    /// Useful to adjust the bottom inset when required, say based on safe area insets changing.
+    public var bottomInset: CGFloat? {
+        didSet {
+            guard bottomInset != oldValue else { return }
+            updateSafeAreaConstraints()
+        }
+    }
+    
     // MARK: Private Properties
     private let anchors: [Anchor]
     private let configuration: HoverConfiguration
@@ -110,6 +119,21 @@ public class HoverView: UIView {
             onPositionChange?(currentAnchor.position)
         }
     }
+    
+    private var bottomSafeAreaConstraints = [NSLayoutConstraint]() {
+        didSet { updateSafeAreaConstraints() }
+    }
+    
+    @available(iOS 11.0, *)
+    public override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
+        updateSafeAreaConstraints()
+    }
+    private func updateSafeAreaConstraints() {
+        guard let value = bottomInset else { return }
+        bottomSafeAreaConstraints.forEach { $0.constant = value }
+    }
+    
     
     // MARK: Lifecycle
     public init(with configuration: HoverConfiguration = HoverConfiguration(), items: [HoverItem] = []) {
@@ -171,8 +195,12 @@ private extension HoverView {
     }
     
     func defineConstraints() {
+        var safeAreaConstraints = [NSLayoutConstraint]()
         anchors.forEach {
-            $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacingInsets, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight)
+            if let safeAreaConstraint = $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacingInsets, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight) {
+                safeAreaConstraints.append(safeAreaConstraint)
+            }
+
             NSLayoutConstraint.activate(
                 [
                     $0.guide.widthAnchor.constraint(equalToConstant: self.configuration.size),
@@ -180,6 +208,7 @@ private extension HoverView {
                 ]
             )
         }
+        self.bottomSafeAreaConstraints = safeAreaConstraints
         
         NSLayoutConstraint.activate(
             [
