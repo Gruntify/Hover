@@ -172,7 +172,7 @@ private extension HoverView {
     
     func defineConstraints() {
         anchors.forEach {
-            $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacing, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight)
+            $0.position.configurePosition(of: $0.guide, inside: self, with: self.configuration.spacingInsets, constrainBottomToSafeAreaIfNonZeroHeight: self.configuration.constrainBottomToSafeAreaIfNonZeroHeight)
             NSLayoutConstraint.activate(
                 [
                     $0.guide.widthAnchor.constraint(equalToConstant: self.configuration.size),

@@ -35,7 +35,7 @@ public struct HoverConfiguration {
     /// Transform of image when button is opened
     public var imageOpenedTransform: CGAffineTransform
     /// Spacing between the floating button to the edges
-    public var spacing: CGFloat
+    public var spacingInsets: UIEdgeInsets
     /// Whether or not spacing is used for button's bottom constraints when there's a non-zero height safe area (eg. iPhone X)
     /// - Note: [StackOverflow Reference](https://stackoverflow.com/a/53634824/)
     public var constrainBottomToSafeAreaIfNonZeroHeight: Bool
@@ -94,7 +94,7 @@ public struct HoverConfiguration {
         scaleDownTransform: CGAffineTransform = CGAffineTransform(scaleX: 0.9, y: 0.9),
         shadow: HoverShadow = HoverShadow(),
         imageOpenedTransform: CGAffineTransform = .identity,
-        spacing: CGFloat = 12.0,
+        spacingInsets: UIEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12),
         constrainBottomToSafeAreaIfNonZeroHeight: Bool = false,
         spacingToFirstItem: CGFloat = 12.0,
         itemSpacingBetweenButtonAndLabel: CGFloat = 8.0,
@@ -117,7 +117,7 @@ public struct HoverConfiguration {
         self.scaleDownTransform = scaleDownTransform
         self.shadow = shadow
         self.imageOpenedTransform = imageOpenedTransform
-        self.spacing = spacing
+        self.spacingInsets = spacingInsets
         self.constrainBottomToSafeAreaIfNonZeroHeight = constrainBottomToSafeAreaIfNonZeroHeight
         self.spacingToFirstItem = spacingToFirstItem
         self.itemSpacingBetweenButtonAndLabel = itemSpacingBetweenButtonAndLabel
