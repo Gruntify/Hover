@@ -131,7 +131,7 @@ public class HoverView: UIView {
     }
     private func updateSafeAreaConstraints() {
         guard let value = bottomInset else { return }
-        bottomSafeAreaConstraints.forEach { $0.constant = value }
+        bottomSafeAreaConstraints.forEach { $0.constant = -value }
     }
     
     
